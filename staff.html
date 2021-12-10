@@ -52,13 +52,13 @@
 
 
     <div class="container" style="margin-top: 4rem;">
-        <h1 class="thin center">Course Search</h1>
-        <h4 class="thin center">Search for Course Information! (Use course code, for example "MATH-1250")</h4>
+        <h1 class="thin center">Staff Search</h1>
+        <h4 class="thin center">Search for UWindsor Stadff! (Use full name, for example "Robert Gordon")</h4>
         <hr>
         <div class="container">
-            <form onsubmit="courseSearch(); return false" class="row d-flex justify-content-center">
+            <form onsubmit="staffSearch(); return false" class="row d-flex justify-content-center">
                 <div class="col-auto">
-                    <input type="text" class="form-control form-control-lg" id="course_code" placeholder="MATH-1250">
+                    <input type="text" class="form-control form-control-lg" id="staff_name" placeholder="Robert Gordon">
                 </div>
                 <div class="col-auto">
                     <input type="submit" value="Search" class="btn btn-lg btn-primary">
@@ -68,21 +68,24 @@
 
         <div class="container text-center" id="result" style="margin-top: 6rem;">
             <h4 id="res_temp" class="thin"></h4>
-            <h2 id="res_title" class="thin"></h2>
-            <p id="res_desc" style="text-align: left; font-size: 1.2rem;"></p>
+            <h2 id="res_name" class="thin"></h2>
+            <h4 id="res_title_dept" class="thin"></h4>
+            <h4 id="res_contact" class="thin"></h4>
+            <h4 id="res_location" class="thin"></h4>
         </div>
     </div>
 
     <script>
-        const courseSearch = async ()=>{
-            let ccode = document.getElementById('course_code').value;
-            console.log(ccode);
-            const res = await fetch(`https://api.uwindsorcss.ca/api/courses?q=${ccode}`);
-            const course = await res.json();
-            console.log(course);
+        const staffSearch = async ()=>{
+            let staff_name = document.getElementById('staff_name').value;
+            const res = await fetch(`https://api.uwindsorcss.ca/api/staff?q=${staff_name}`);
+            const staff = await res.json();
+            console.log(staff);
             document.querySelector('#res_temp').innerText = "Best Match:";
-            document.querySelector('#res_title').innerText = `${course.course_code} ~ ${course.title}`;
-            document.querySelector('#res_desc').innerText = course.description;
+            document.querySelector('#res_name').innerText = staff.name;
+            document.querySelector('#res_title_dept').innerText = `${staff.title} ~ ${staff.department}`;
+            document.querySelector('#res_contact').innerText = `E: ${staff.email}, P: ${staff.phone}`;
+            document.querySelector('#res_location').innerText = staff.location;
         }
     </script>
 
