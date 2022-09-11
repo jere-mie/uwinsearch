@@ -75,7 +75,7 @@
         const courseSearch = async ()=>{
             let ccode = document.getElementById('course_code').value;
             console.log(ccode);
-            const res = await fetch(`https://api.uwindsorcss.ca/api/courses?q=${ccode}`);
+            const res = await fetch(`https://api.uwindsorcss.ca/v1/course/${ccode}`);
             const course = await res.json();
             console.log(course);
             document.querySelector('#res_temp').innerText = "Best Match:";

@@ -76,7 +76,7 @@
     <script>
         const staffSearch = async ()=>{
             let staff_name = document.getElementById('staff_name').value;
-            const res = await fetch(`https://api.uwindsorcss.ca/api/staff?q=${staff_name}`);
+            const res = await fetch(`https://api.uwindsorcss.ca/v1/staff/${staff_name}`);
             const staff = await res.json();
             console.log(staff);
             document.querySelector('#res_temp').innerText = "Best Match:";
